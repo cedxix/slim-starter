@@ -1,0 +1,36 @@
+{% extends viewbag.layout %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}  
+    
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="page-header">
+                <h1>Signup</h1>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <form role="form" action="/signup" method="post" name="Signup">
+                {{ frm.Textbox(viewbag.forms.Signup.Email) }}
+                {{ frm.Password(viewbag.forms.Signup.Password) }}
+                {{ frm.PasswordCheck(viewbag.forms.Signup.PasswordCheck) }}
+                {{ frm.Textbox(viewbag.forms.Signup.FriendlyName) }}
+                <button type="submit" class="btn btn-default">Create account</button>
+            </form>            
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+            <p class="well well-lg">
+                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, 
+                tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum 
+                massa justo sit amet risus. Etiam porta sem malesuada magna mollis 
+                euismod. Donec sed odio dui. 
+            </p>
+        </div>
+    </div>    
+    
+{% endblock %}
+

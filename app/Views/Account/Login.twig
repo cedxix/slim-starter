@@ -1,0 +1,45 @@
+{% extends viewbag.layout %}
+
+{% block title %}Login{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">                
+        <a class="navbar-brand" href="/">Project</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}  
+    
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="page-header">
+                <h1>Login</h1>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <form role="form" action="/login" method="post" name="Login">
+                {{ frm.Textbox(viewbag.forms.Login.Email) }}
+                {{ frm.Password(viewbag.forms.Login.Password) }}
+
+                <button type="submit" class="btn btn-default">Sign in</button>
+            </form>            
+
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+            <p class="well well-lg">
+                Vestibulum semper accumsan ante, at efficitur libero euismod non. 
+                Nulla et hendrerit nulla. Vestibulum sed risus nibh. Aliquam ac odio 
+                et odio aliquet condimentum non sed felis. Nam purus ante, fringilla 
+                ac diam nec, mattis facilisis mi. Aenean vel scelerisque nulla, ac 
+                lacinia nulla.
+            </p>
+        </div>
+    </div>    
+    
+{% endblock %}
+

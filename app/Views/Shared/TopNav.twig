@@ -1,0 +1,35 @@
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            {{ nav.HamburgerToggleButton('.navbar-collapse') }}
+            {{ nav.Brand() }}
+        </div>
+        <div class="navbar-collapse collapse">
+            {% if viewbag.user.id %}
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">A drop down <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">This item</a></li>
+                            <li><a href="#">That item</a></li>
+                            <li><a href="#">The other</a></li>
+                            <li class="divider" style="padding-top:15px;"> </li>
+                            <li class="dropdown-header">{{ viewbag.user.name }}<br>{{ viewbag.user.email }}</li>
+                            {{ nav.Li('/profile', 'Profile', 'fa-user', viewbag.NavTag|default() == 'profile') }}
+                            {{ nav.Li('/logout', 'Sign out', 'fa-sign-out') }}
+                        </ul>
+                    </li>
+                </ul>
+            {% else %}
+                <form class="navbar-form navbar-right" role="form" action="/login" method="post" name="Login">
+                    {{ frm.InlineTextbox(viewbag.forms.Login.Email) }}
+                    {{ frm.InlinePassword(viewbag.forms.Login.Password) }}
+                    <button type="submit" class="btn btn-default">Sign in</button>
+                </form>
+            {% endif %}
+        </div><!--/.nav-collapse -->                
+    </div>
+</div>
+
+
+    

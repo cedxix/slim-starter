@@ -1,0 +1,23 @@
+SetEnv SLIM_MODE "development"
+
+RewriteEngine On
+
+# disable the server signature
+# ServerSignature Off
+
+# disable directory browsing
+# Options All -Indexes
+
+# prevent folder listing
+# IndexIgnore *
+
+# secure htaccess file
+# <Files .htaccess>
+# order allow,deny
+# deny from all
+# </Files>
+ 
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule . index.php [QSA,L]
+
+

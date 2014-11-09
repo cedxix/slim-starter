@@ -1,0 +1,79 @@
+{% import "Macros/Navs.twig" as nav %}    
+{% import "Macros/Forms.twig" as frm %}    
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% include "Shared/Head.twig" %}
+
+        <title>{% block title %}{% endblock %}</title>
+
+        <style type="text/css">
+            /* Sticky footer styles
+            -------------------------------------------------- */
+            html {
+                position: relative;
+                min-height: 100%;
+            }
+            body {
+                padding-top: 30px;
+                margin-bottom: 60px; /* Margin bottom by footer height */
+            }
+            footer.sticky {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                /* Set the fixed height of the footer here */
+                height: 60px;
+                background-color: #222222;
+            }
+            footer.sticky > .container {
+                padding: 15px 15px 5px;
+            }
+
+            .main {
+                padding-bottom: 60px;
+            }
+            
+            
+            /* form enhancements */
+            .form-control ~ p.help-block 
+            {
+                /*display: none;*/
+                visibility: hidden;
+            }
+            .form-control:focus ~ p.help-block, 
+            .form-control ~ p.help-block.bg-danger 
+            {
+                /*display: block;*/
+                visibility: visible;
+            }            
+            
+        </style>
+        
+        {% block head %}{% endblock %}
+    </head>
+    <body>
+        {% block navbar %}
+            {% include "Shared/TopNav.twig" %}
+        {% endblock %}
+        
+
+        <div class="container-fluid main">
+            {% block content %}{% endblock %}
+        </div>
+
+        
+        {% block footer %}
+        <footer class="sticky">
+            <div class="container">
+                <p class="text-muted">Place sticky footer content here.</p>
+            </div>
+            {% if viewbag.isDebug|default(false) %} {{ dump(viewbag) }} {% endif %}
+        </footer>
+        {% endblock %}
+
+        {% include "Shared/Tail.twig" %}
+        {% block tail %}{% endblock %}
+
+    </body>
+</html>

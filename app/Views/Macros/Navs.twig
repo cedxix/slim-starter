@@ -1,0 +1,25 @@
+
+{% macro Li(href, label, icon, isActive = false, addlClass = "" ) %}
+    <li class="{% if isActive %}active{% endif %} {{ addlClass }}"><a href="{{href}}" title="{{ label }}"><i class="fa {{icon}} fa-fw"></i> {{ label }}</a></li>
+{% endmacro %}
+
+{% macro LiXs(href, label, icon, isActive = false, addlClass = "" ) %}
+    <li class="{% if isActive %}active{% endif %} {{ addlClass }}"><a href="{{href}}" title="{{ label }}"><i class="fa {{icon}} fa-fw"></i></a></li>
+{% endmacro %}
+
+
+{% macro HamburgerToggleButton(targetSelector, srLabel = "Toggle navigation") %}
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="{{ targetSelector }}">
+        <span class="sr-only">{{ srLabel }}</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+{% endmacro %}
+
+
+{% macro Brand() %}
+    <a class="navbar-brand" href="/">Application Name</a>
+{% endmacro %}
+
+

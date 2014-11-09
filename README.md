@@ -1,7 +1,7 @@
 slim-starter
 ============
 
-Starter project for bootstrapping lightweight APIs in PHP.
+Starter project for bootstrapping lightweight web apps in PHP.
 
 Uses 
 - [Composer](https://getcomposer.org/)

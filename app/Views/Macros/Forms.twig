@@ -1,0 +1,171 @@
+
+{% macro Hidden(field) %}
+    <input type="hidden" class="form-control" id="{{ field.id }}" name="{{ field.name }}" 
+           value="{{ field.value }}">
+{% endmacro %}
+
+
+{% macro InlineTextbox(field) %}
+<div class="form-group">
+    <input type="text" class="form-control" id="{{ field.id }}" name="{{ field.name }}" 
+           placeholder="{{ field.placeholder }}" 
+           value="{{ field.value }}">
+</div>
+{% endmacro %}
+
+
+{% macro InlinePassword(field) %}
+<div class="form-group">
+    <input type="password" class="form-control" id="{{ field.id }}" name="{{ field.name }}" 
+           placeholder="{{ field.placeholder }}" 
+           value="{{ field.value }}">
+</div>
+{% endmacro %}
+
+
+{% macro Textbox(field) %}
+<div class="form-group {% if field.hasError %}has-error  has-feedback{% endif %}">
+    <label class="control-label" for="{{ field.id }}">{{ field.label }}</label>
+    <input type="text" class="form-control" id="{{ field.id }}" name="{{ field.name }}" 
+           placeholder="{{ field.placeholder }}" 
+           value="{{ field.value }}">
+    {% if field.hasError %}
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <ul class="help-block list-unstyled"> 
+            {% for key,msg in field.errorMsg %}
+                <li>{{ msg|e }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="help-block">{{ field.helptext }}</p>
+    {% endif %}
+</div>
+{% endmacro %}
+
+
+{% macro Password(field) %}
+<div class="form-group {% if field.hasError %}has-error  has-feedback{% endif %}">
+    <label class="control-label" for="{{ field.id }}">{{ field.label }}</label>
+    <input type="password" class="form-control" id="{{ field.id }}" name="{{ field.name }}" 
+           placeholder="{{ field.placeholder }}" 
+           value="{{ field.value }}">
+    {% if field.hasError %}
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <ul class="help-block list-unstyled"> 
+            {% for key,msg in field.errorMsg %}
+                <li>{{ msg|e }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="help-block">{{ field.helptext }}</p>
+    {% endif %}
+</div>
+{% endmacro %}
+
+
+{% macro PasswordCheck(field) %}
+    
+    {% set cleanId = field.id|replace({'[': '', ']': ''}) %}
+    {% set cleanSourceId = field.sourceFieldId|replace({'[': '', ']': ''}) %}
+
+    {% set jsId = field.id|replace({'[': '\\\\[', ']': '\\\\]'}) %}
+    {% set jsSourceId = field.sourceFieldId|replace({'[': '\\\\[', ']': '\\\\]'}) %}
+    
+<div class="form-group {% if field.hasError %}has-error  has-feedback{% endif %}">
+    <label class="control-label" for="{{ field.id }}">{{ field.label }}</label>
+    <input type="password" class="form-control" id="{{ field.id }}" name="{{ field.name }}" 
+           placeholder="{{ field.placeholder }}" onChange="checkMatchingFieldFor_{{ cleanId }}();" 
+           value="{{ field.value }}">
+    {% if field.hasError %}
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <ul class="help-block list-unstyled"> 
+            {% for key,msg in field.errorMsg %}
+                <li>{{ msg|e }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="help-block">{{ field.helptext }}</p>
+    {% endif %}
+    <p class="help-block" id="matchInfoFor_{{ cleanId }}"></p>
+</div>
+
+<script type="text/javascript">
+    function checkMatchingFieldFor_{{ cleanId }}() {
+        var sourceFieldVal = $("#{{ jsSourceId }}").val();
+        var checkFieldVal = $("#{{ jsId }}").val();
+        var matchInfo = $("#matchInfoFor_{{ cleanId }}");
+        
+        if (sourceFieldVal != checkFieldVal) {
+            matchInfo.html("{{ field.matchFailMsg }}");
+            matchInfo.addClass('bg-danger');
+            matchInfo.removeClass('bg-success');
+        } else {
+            matchInfo.html("{{ field.matchPassMsg }}");
+            matchInfo.addClass('bg-success');
+            matchInfo.removeClass('bg-danger');
+        }
+    }
+
+    $(document).ready(function () {
+       $("#{{ jsId }}").keyup(checkMatchingFieldFor_{{ cleanId }});
+    });
+</script>    
+{% endmacro %}
+
+
+{% macro RadioInline(field) %}
+<div class="form-group">
+    {% for option in field.options %}
+    <label class="radio-inline" title="{{ option.helptext }}">
+        <input type="radio" 
+               name="{{ field.name }}" 
+               id="{{ option.id }}" 
+               value="{{ option.value }}"
+               {% if option.selected %} checked {% endif %}
+               {% if option.disabled %} disabled {% endif %}
+               > {{ option.label }}
+    </label>
+    {% endfor %}
+</div>
+{% endmacro %}
+
+
+{% macro Radio(field) %}
+{% for option in field.options %}
+<div class="radio">
+    <label title="{{ option.helptext }}">
+        <input type="radio" 
+               name="{{ field.name }}" 
+               id="{{ option.id }}" 
+               value="{{ option.value }}"
+               {% if option.selected %} checked {% endif %}
+               {% if option.disabled %} disabled {% endif %}
+               > {{ option.label }}
+    </label>
+</div>
+{% endfor %}
+{% endmacro %}
+
+
+{% macro RadioListGroup(field) %}
+<div class="list-group">
+    {% for option in field.options %}
+    <div class="list-group-item ">
+        <div class="radio">
+            <label>
+                <input type="radio" 
+                       name="{{ field.name }}" 
+                       id="{{ option.id }}" 
+                       value="{{ option.value }}"
+                       {% if option.selected %} checked {% endif %}
+                       {% if option.disabled %} disabled {% endif %}
+                       > 
+                    <h4 class="list-group-item-heading">{{ option.label }}</h4>
+                    <p class="list-group-item-text">{{ option.helptext }}</p>
+            </label>
+        </div>
+    </div>
+    {% endfor %}
+</div>    
+{% endmacro %}
+
