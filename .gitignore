@@ -17,10 +17,6 @@ vendor/
 # composer.lock
 
 
-### Application Specific
-data/*
-logs/*
-cache/*
-
 ### NetBeans
 nbproject/private
+
