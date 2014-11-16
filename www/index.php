@@ -32,7 +32,7 @@ $app = new \SlimController\Slim(array(
     // - - - - - - - - - -
     'view' => new \Slim\Views\Twig(),
     'templates.path' => __DIR__ . '/../app/Views'
-
+    
 ));
 
 // - - - - - - - - - -
