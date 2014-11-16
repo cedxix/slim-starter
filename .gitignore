@@ -20,3 +20,5 @@ vendor/
 ### NetBeans
 nbproject/private
 
+
+sql/history.json
